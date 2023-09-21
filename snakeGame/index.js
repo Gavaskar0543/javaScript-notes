@@ -5,6 +5,10 @@ const HEIGHT = gameBoard.height;
 //score
 let socreText = document.getElementById("scoreValue");
 let score = 0;
+//audios
+let gameStarter = document.getElementById('gameStart');
+let foodEat = document.getElementById('foodAudio');
+let gameOver = document.getElementById('myAudio')
 //to start game
 let active = true;
 let starter = false;
@@ -24,9 +28,18 @@ let xVelocity = 25;
 let yVelocity = 0;
 //key events
 window.addEventListener("keydown", keyPress);
+//localStorage
+const HighScore = localStorage.getItem('HighScore');
+if (HighScore === null) {
 
+localStorage.setItem('HighScore',score);
+}
+//highScore
+let highScore = document.getElementById('high-score');
+highScore.innerHTML = HighScore;
 function keyPress(event) {
    if(!starter){
+      gameStarter.play();
          starter = true;
          nextTick();
    }
@@ -96,6 +109,7 @@ function moveSnake() {
   const head = { x: snake[0].x + xVelocity, y: snake[0].y + yVelocity };
   snake.unshift(head);
   if(snake[0].x == foodx && snake[0].y == foody){
+    foodEat.play();
     score += 1;
     socreText.innerHTML = score;
     createFood();
@@ -115,16 +129,27 @@ function nextTick() {
     checkGameOver();
     nextTick();
     
-  }, 200)
+  }, 100)
 }
 else{
     clearBoard();
+    gameOver.play();
     context.font = "bold 50px sans-serif";
     context.fillStyle = "white";
     context.textAlign = "center";
     context.fillText("Game Over!",WIDTH/2,HEIGHT/2 );
-}
+    let checkScore = localStorage.getItem('HighScore');
+    if(checkScore < score){
+    localStorage.setItem('HighScore', score);
+    }
+    
 
+   
+      
+        
+      
+    
+}
 }
 
 function checkGameOver(){

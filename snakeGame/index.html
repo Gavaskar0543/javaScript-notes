@@ -10,12 +10,27 @@
     
         <h2>Snake Game</h2>
         <div id="msg">Press space to pause or continue</div>
+        <div>HighScore:<span id="high-score"></span></div>
         <div id="container">
             <canvas id="gameBoard" width="500" height="500"></canvas>
         </div>
         <div id="score">
           Score: <span id="scoreValue">0</span>
         </div>
+
+        <audio id="myAudio" >
+            <source src="./audios/Loping Sting - Kevin MacLeod.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+
+          <audio id="foodAudio">
+            <source src="./audios/Cartoon (Sting) - Twin Musicom.mp3" type="audio/mpeg">
+          </audio>
+
+          <audio id="gameStart">
+            <source src="./audios/Danzon De Pasion (Sting) - Jimmy Fontanez_Media Right Productions.mp3" type="audio/mpeg">
+          </audio>
+          
     <script src="index.js"></script>
 </body>
 </html>
