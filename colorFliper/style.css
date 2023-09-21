@@ -1,0 +1,34 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:monospace;
+    font-size: large;
+}
+.color{
+    margin-top:2vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px !important;
+}
+.wraper{
+   width: 95vw;
+   height: 95vh;
+   margin-top: 5vh;
+    border:1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 2vw;
+   
+    
+}
+
+.btn{
+    width:20vw;
+    height:5vh;
+    border-radius: 6px;
+    color:whitesmoke;
+    background-color: black;
+}
