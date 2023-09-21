@@ -2,6 +2,12 @@ const gameBoard = document.getElementById("gameBoard");
 const context = gameBoard.getContext("2d");
 const WIDTH = gameBoard.width;
 const HEIGHT = gameBoard.height;
+//score
+let socreText = document.getElementById("scoreValue");
+let score = 0;
+//to start game
+let active = true;
+let starter = false;
 //food width height
 const UNIT = 25;
 let foodx;
@@ -20,6 +26,10 @@ let yVelocity = 0;
 window.addEventListener("keydown", keyPress);
 
 function keyPress(event) {
+   if(!starter){
+         starter = true;
+         nextTick();
+   }
   const LEFT = 37;
   const UP = 38;
   const RIGHT = 39;
@@ -53,8 +63,8 @@ function startGame() {
   //FOOD
   createFood();
   displayFood();
-
-  nextTick();
+  drawSnake();
+ 
 }
 
 function clearBoard() {
@@ -85,15 +95,45 @@ function drawSnake() {
 function moveSnake() {
   const head = { x: snake[0].x + xVelocity, y: snake[0].y + yVelocity };
   snake.unshift(head);
+  if(snake[0].x == foodx && snake[0].y == foody){
+    score += 1;
+    socreText.innerHTML = score;
+    createFood();
+  }
+  else{
   snake.pop();
+  }
 }
 
 function nextTick() {
+   if(active){
   setTimeout(() => {
     clearBoard();
     displayFood();
     moveSnake();
     drawSnake();
+    checkGameOver();
     nextTick();
-  }, 500);
+    
+  }, 200)
+}
+else{
+    clearBoard();
+    context.font = "bold 50px sans-serif";
+    context.fillStyle = "white";
+    context.textAlign = "center";
+    context.fillText("Game Over!",WIDTH/2,HEIGHT/2 );
+}
+
+}
+
+function checkGameOver(){
+    switch(true){
+        case snake[0].x < 0:
+        case snake[0].x > WIDTH:
+        case snake[0].y < 0:
+        case snake[0].y > HEIGHT:
+            active = false;
+            break;
+    }
 }
