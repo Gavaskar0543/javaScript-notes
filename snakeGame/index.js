@@ -129,7 +129,7 @@ function nextTick() {
     checkGameOver();
     nextTick();
     
-  }, 100)
+  }, 200)
 }
 else{
     clearBoard();
