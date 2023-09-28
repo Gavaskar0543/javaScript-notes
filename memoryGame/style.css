@@ -38,9 +38,11 @@ body{
     align-items: center;
     justify-content: center;
     font-size:45px;
-    background-color: #ffc500;;
+   color: rgb(225, 47, 47);
+    border-radius: 10px;
 
 }
+
 .cardBack{
     background-color: #e5e5f7;
     opacity:0.8;
@@ -49,6 +51,15 @@ body{
     background-size: 10px 10px;
     background-repeat: repeat;
 
+}
+.won{
+    font-size:35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:peru;
+    text-transform: capitalize;
+    background: none;
 }
 
 #gameBoad div:hover{

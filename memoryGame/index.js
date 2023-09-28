@@ -1,3 +1,4 @@
+"strict mode"
 const cardArray= [
     {
         name:'dog',
@@ -50,6 +51,7 @@ const cardArray= [
     },
 ];
 let flipedCard = [];
+let matchedPair = 0;
 suffleCard();
 const gameBoard = document.getElementById('gameBoard');
 
@@ -73,8 +75,48 @@ function displayCards(){
 }
 
 function flipCard(){
-    let cardId = this.getAttribute('id');
-    flipedCard.push(this);
-    this.classList.remove('cardBack');
-    this.innerHTML = cardArray[cardId].icon;
+    if(flipedCard.length < 2 && this.classList.contains('active')){
+        let cardId = this.getAttribute('id');
+        flipedCard.push(this);
+        this.classList.remove('cardBack');
+        this.innerHTML = cardArray[cardId].icon;
+       if(flipedCard.length  == 2){
+       setTimeout( checkMatch,1500);
+       }
+    }
+}
+
+function checkMatch(){
+   const card1Id = flipedCard[0].getAttribute('id');
+   const card2Id = flipedCard[1].getAttribute('id');
+   if(cardArray[card1Id].name == cardArray[card2Id].name){
+    flipedCard[0].style.border ="none";
+    flipedCard[0].style.background ="none";
+    flipedCard[0].classList.remove('active');
+    flipedCard[0].innerHTML = "";
+    flipedCard[1].style.border ="none";
+    flipedCard[1].style.background ="none";
+    flipedCard[1].innerHTML = "";
+    flipedCard[1].classList.remove('active');
+    matchedPair++;
+    checkGameOver();
+   }
+   else{
+    flipedCard[0].innerHTML = "";
+    flipedCard[0].classList.add('cardBack');
+    flipedCard[1].innerHTML = "";
+    flipedCard[1].classList.add('cardBack');
+
+   }
+   flipedCard = [];
+}
+function checkGameOver(){
+if(matchedPair == cardArray.length/2){
+while(gameBoard.firstChild){
+gameBoard.removeChild(gameBoard.firstChild);
+}
+gameBoard.innerHTML =`<h1>you won!<span>&#x1F490;</span></h1>`
+gameBoard.classList.remove('game');
+gameBoard.classList.add('won');
+}
 }
