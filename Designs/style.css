@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #222;
+    position: relative;
+}
+
+.bubble-container {
+    position: relative;
+   bottom: 0;
+    width: 50%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.bubble {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    color:azure;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: bubble-rise 10s linear forwards;
+}
+
+@keyframes bubble-rise {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+}
